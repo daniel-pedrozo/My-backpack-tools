@@ -39,7 +39,7 @@ def main():
     parser.add_argument("-n", "--numbers", action="store_true", help="Use numbers")
     parser.add_argument("-u", "--uppercase", action="store_true", help="Use uppercase letters")
     parser.add_argument("-w", "--word", action="store_true", help="Add your word on the password")
-    parser.add_argument("-r", "--recommend", action="store_true", help="Make the password on ours ecommendations")
+    parser.add_argument("-r", "--recommend", action="store_true", help="Make the password on ours recommendations")
     args = parser.parse_args()
 
     password = generate_password(
