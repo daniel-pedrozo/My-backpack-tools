@@ -1,12 +1,15 @@
+
+![🔒_Password_Creator](https://github.com/user-attachments/assets/70b0a3c9-785e-47c9-b9e8-88bc53303ed7)
+
 # Password creator
 
 **A versatile Python script to create strong, customizable passwords.**
 
-## Objective
+## 🎯 Objective
 
 This tool empowers you to create strong, personalized passwords. Easily adjust the password length and complexity by selecting the desired mix of symbols, numbers, uppercase letters, and custom words. For added security, you can even generate random password phrases.
 
-### Features:
+### 💡 Features:
 
 * **Customizable Length:** Set the desired password length.
 * **Character Set Selection:** Choose from uppercase, lowercase, numbers, and symbols.
@@ -16,7 +19,7 @@ This tool empowers you to create strong, personalized passwords. Easily adjust t
 * **User-Friendly Interface:** Easy-to-use command-line interface.
 
 
-### Librarys Used
+### 📚 Librarys Used
 
 - random
 - string
@@ -26,7 +29,7 @@ This tool empowers you to create strong, personalized passwords. Easily adjust t
 - shutil
 - colorama
 
-### Installation:
+### ⚙️ Installation:
 
 1. **Clone the Repository:**
    
@@ -41,14 +44,14 @@ This tool empowers you to create strong, personalized passwords. Easily adjust t
    `pip install -r requirements.txt`
 
 
-### Usage:
+### 🌱 Usage:
 
 `python3 passCreator.py -h`
 
 We only tested on **linux** so far, but it can run on windows too.
 
 
-### Skills Learned
+### 💪 Skills Learned
 
 #### Librarys
 
@@ -70,7 +73,7 @@ We only tested on **linux** so far, but it can run on windows too.
 - Command-line arguments: Using `argparse` allows users to configure password generation through command-line options, showcasing your understanding of user input handling.
 
 
-### Contributing:
+### 🗃️ Contributing:
 
 Feel free to contribute to this project by:
 
