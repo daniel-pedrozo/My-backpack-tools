@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airport Free Wi-Fi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+        }
+
+        #headerDisplay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        #headerDisplay img {
+            margin-right: 10px;
+        }
+
+        main {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        form {
+            width: 90%;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f0f0f0;
+            font-size: 14px;
+        }
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            #headerDisplay img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+
+            #headerDisplay h1 {
+                font-size: 20px;
+                margin: 0;
+            }
+
+            form {
+                width: 100%;
+                padding: 10px;
+            }
+
+            button {
+                width: 100%;
+                padding: 12px;
+            }
+
+            footer {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="headerDisplay">
+            <img src="{{ url_for('static', filename='images/twoMoon_logo.jpeg') }}" alt="Airport Logo">
+            <h1>Welcome to Two Moon Airport Free Wi-Fi</h1>
+        </div>
+    </header>
+    <main>
+        <p>Please login to access the internet.</p>
+        <form method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>By logging in, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+        <p>We use industry-standard security measures to protect your information.</p>
+    </main>
+    <footer>
+        &copy; 2024 Two Moon Airport Wi-Fi
+    </footer>
+</body>
+
+</html>
