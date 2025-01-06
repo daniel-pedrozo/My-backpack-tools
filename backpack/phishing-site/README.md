@@ -19,7 +19,7 @@ This project demonstrates how phishing pages can be used to capture sensitive us
 1. Clone this repository:  
    ```bash
    git clone https://github.com/daniel-pedrozo/My-backpack-tools.git
-   cd My-backpack-tools/backpack/password-creator
+   cd My-backpack-tools/backpack/phishing-site
    ```  
 
 2. Install the required dependencies:  
