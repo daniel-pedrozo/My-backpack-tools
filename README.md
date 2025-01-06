@@ -22,6 +22,13 @@ The Backpack Tools project aims to create a collection of simple tools for daily
 - **Password creator**
   - A versatile Python script to create strong, customizable passwords.
 - **Password cracker**
-  - A versatile Python script to crack / test passwords.  
-
+  - A versatile Python script to crack / test passwords.
+- **Password stength**
+  - A versatile Python script to test the stength of passwords.    
+- **Phishing site**
+  - This project demonstrates how phishing pages can be used to capture sensitive user information.
+- **Keylogger**
+  - Simple demostration on how keyloggers work, and how simple they can be. 
+   
+---
 ## 🛠️ Readme on construction...
