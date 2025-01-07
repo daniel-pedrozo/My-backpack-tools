@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin-top: 2%;
+            margin-bottom: 2%;
+            margin-left: 4%;
+            margin-right: 4%;
+            padding: 0;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        main {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .statistics-box {
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .statistics-box h2 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .statistics-box p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .statistics-box table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .statistics-box th,
+        .statistics-box td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .statistics-box th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .statistics-box tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Statistics section */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            flex: 1;
+            margin: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-box h3 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .stat-box p {
+            font-size: 24px;
+            margin: 5px 0 0;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #search-input {
+            padding: 8px;
+            width: 200px;
+            font-size: 14px;
+        }
+
+        /* Form styles */
+        form {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .stats {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .stat-box {
+                margin: 10px 0;
+            }
+
+            table {
+                font-size: 14px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Admin Dashboard</h1>
+    <div class="statistics-box">
+        <h2>Statistics</h2>
+        <p>Total Captured Credentials: {{ total }}</p>
+        <p>Unique IPs: {{ ips }}</p>
+
+        <h2>Captured Credentials</h2>
+        <input type="text" id="search-input" placeholder="Search by Username, IP, or Agent">
+
+        <table border="1" id="credentials-table">
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>IP Address</th>
+                <th>User Agent</th>
+                <th>Timestamp</th>
+                <th>Action</th> <!-- New column for the Remove button -->
+            </tr>
+            {% for cred in credentials %}
+            <tr class="table-row" id="row-{{ cred[0] }}">
+                <td>{{ loop.index }}</td>
+                <td>{{ cred[1] }}</td>
+                <td>{{ cred[2] }}</td>
+                <td>{{ cred[3] }}</td>
+                <td>{{ cred[4] }}</td>
+                <td>{{ cred[5] }}</td>
+                <td><button class="remove-btn" onclick="removeRow({{ cred[0] }})">Remove</button></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Show more/show less functionality -->
+        <div id="show-more-container">
+            <button id="show-more-button" onclick="showMoreRows()">Show More</button>
+            <button id="show-less-button" onclick="showLessRows()" style="display: none;">Show Less</button>
+        </div>
+
+    </div>
+
+    <h2>Site Configuration</h2>
+    <h3>To be added...</h3>
+</body>
+
+<script>
+    let rowsPerPage = 5;
+
+    function showMoreRows() {
+        const rows = document.querySelectorAll('.table-row');
+        let visibleRows = Array.from(rows).filter(row => row.style.display !== 'none').length;
+
+        // Show next set of rows
+        if (visibleRows < rows.length) {
+            // Show more rows
+            for (let i = visibleRows; i < visibleRows + rowsPerPage && i < rows.length; i++) {
+                rows[i].style.display = '';
+            }
+            // Hide the "Show More" button if all rows are visible
+            if (visibleRows + rowsPerPage >= rows.length) {
+                document.getElementById('show-more-button').style.display = 'none';
+            }
+            document.getElementById('show-less-button').style.display = '';
+        }
+    }
+
+    function showLessRows() {
+        const rows = document.querySelectorAll('.table-row');
+
+        // Hide all rows beyond the first 5
+        for (let i = rowsPerPage; i < rows.length; i++) {
+            rows[i].style.display = 'none';
+        }
+
+        document.getElementById('show-more-button').style.display = '';
+        document.getElementById('show-less-button').style.display = 'none';
+    }
+
+    // Initially, hide rows beyond the first 5
+    document.addEventListener('DOMContentLoaded', function () {
+        const rows = document.querySelectorAll('.table-row');
+        for (let i = rowsPerPage; i < rows.length; i++) {
+            rows[i].style.display = 'none';
+        }
+    });
+
+    // Filter function
+    document.getElementById('search-input').addEventListener('input', function () {
+        let searchTerm = this.value.toLowerCase();
+        let rows = document.querySelectorAll('#credentials-table .table-row');
+
+        if (searchTerm === '') {
+            // If the search term is empty, show all rows
+            rows.forEach(function (row) {
+                row.style.display = ''; // Reset the row to visible
+            });
+        } else {
+            // If there is a search term, filter rows
+            rows.forEach(function (row) {
+                let cells = row.getElementsByTagName('td');
+                let matchFound = false;
+
+                // Loop through each cell to check if it contains the search term
+                for (let i = 0; i < cells.length; i++) {
+                    if (cells[i].textContent.toLowerCase().includes(searchTerm)) {
+                        matchFound = true;
+                        break;  // Stop searching once a match is found
+                    }
+                }
+
+                // Show or hide the row based on whether a match is found
+                if (matchFound) {
+                    row.style.display = ''; // Show row
+                } else {
+                    row.style.display = 'none'; // Hide row
+                }
+            });
+        }
+        showLessRows()
+    });
+
+    function removeRow(rowId) {
+    // Make AJAX request to the server to delete the record from the database
+    fetch('/remove-credential', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: rowId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Find the row and remove it from the DOM
+            const row = document.getElementById('row-' + rowId);
+            row.remove();
+
+            // Optionally: Update row numbers after removal
+            const rows = document.querySelectorAll('#credentials-table .table-row');
+            rows.forEach((row, index) => {
+                row.querySelector('td:first-child').textContent = index + 1; // Update ID column
+            });
+
+            // Refresh the table by fetching the updated data
+            fetchUpdatedTable();
+        } else {
+            alert("Error removing credential");
+        }
+    })
+    .catch(error => {
+        console.error('Error removing credential:', error);
+    });
+}
+
+// Function to fetch and refresh the table content
+function fetchUpdatedTable() {
+    fetch('/admin') // Assuming this route will return the updated credentials table data
+        .then(response => response.json())
+        .then(data => {
+            const credentialsTable = document.getElementById('credentials-table');
+            const tableRows = credentialsTable.querySelectorAll('.table-row');
+            
+            // Remove existing rows (except the header row)
+            tableRows.forEach(row => row.remove());
+
+            // Add the updated rows to the table
+            data.credentials.forEach((cred, index) => {
+                const row = document.createElement('tr');
+                row.classList.add('table-row');
+                row.id = 'row-' + cred.id;
+
+                // Populate row cells
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${cred.username}</td>
+                    <td>${cred.password}</td>
+                    <td>${cred.ip_address}</td>
+                    <td>${cred.user_agent}</td>
+                    <td>${cred.timestamp}</td>
+                    <td><button class="remove-btn" onclick="removeRow(${cred.id})">Remove</button></td>
+                `;
+                credentialsTable.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching updated table:', error);
+        });
+}
+
+
+
+</script>
+
+</html>
